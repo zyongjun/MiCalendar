@@ -11,7 +11,7 @@ import java.io.Serializable;
 public class CustomDate implements Serializable{
 	private static final long serialVersionUID = 1L;
 	public int year;
-	public int month;
+	public int month;	//1~12
 	public int day;
 	public int week;
 	
@@ -38,6 +38,38 @@ public class CustomDate implements Serializable{
 		CustomDate modifiDate = new CustomDate(date.year,date.month,day);
 		return modifiDate;
 	}
+
+	public static CustomDate addMonth(CustomDate date,int month){
+		CustomDate modifiDate = new CustomDate();
+		int addToMonth = date.month + month;
+		if(month == 0){
+			//donothing
+		}else if(month > 0){
+			if(addToMonth > 12){
+				modifiDate.setYear(date.year + (addToMonth - 1) / 12);
+				modifiDate.setMonth(addToMonth % 12 == 0 ? 12: addToMonth % 12);
+			}else {
+				modifiDate.setMonth(addToMonth);
+			}
+		}else{
+			if(addToMonth == 0){
+				modifiDate.setYear(date.year - 1);
+				modifiDate.setMonth(12);
+			}else if(addToMonth < 0){
+				modifiDate.setYear(date.year - ((Math.abs(addToMonth) / 12) + 1));
+				int temp_month = (((Math.abs(addToMonth) - 1) / 12) + 1) * 12 + addToMonth;
+				modifiDate.setMonth(temp_month == 0 ? 12 : temp_month);
+			}else {
+				modifiDate.setMonth(addToMonth == 0 ? 12 : addToMonth);
+			}
+
+
+		}
+
+
+		return modifiDate;
+	}
+
 	@Override
 	public String toString() {
 		return year+"-"+month+"-"+day;

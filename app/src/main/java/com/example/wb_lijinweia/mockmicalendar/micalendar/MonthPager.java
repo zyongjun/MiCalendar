@@ -9,6 +9,7 @@ import android.view.View;
 
 @CoordinatorLayout.DefaultBehavior(MonthPager.Behavior.class)
 public class MonthPager extends ViewPager {
+    public static int CURRENT_DAY_INDEX = 1000;
     private int selectedIndex;
 
     public MonthPager(Context context) {

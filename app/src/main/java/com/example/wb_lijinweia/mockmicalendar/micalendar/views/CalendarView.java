@@ -20,7 +20,6 @@ import com.example.wb_lijinweia.mockmicalendar.micalendar.utils.DateUtil;
 import com.example.wb_lijinweia.mockmicalendar.micalendar.utils.LunarCalendar;
 
 public class CalendarView extends View {
-
 	private static final String TAG = "CalendarView";
 	/**
 	 * 两种模式 （月份和星期）
@@ -39,7 +38,8 @@ public class CalendarView extends View {
 	private int mViewHight;	// 视图的高度
 	private int mCellSpace;	// 单元格间距
 	private Row rows[] = new Row[TOTAL_ROW];	// 行数组，每个元素代表一行
-	private static CustomDate mShowDate;//自定义的日期  包括year month day
+
+	private CustomDate mShowDate;//自定义的日期  包括year month day
 	public static int style = MONTH_STYLE;
 	private static final int WEEK = 7;
 	private OnCellCallBack mOnCellCallBack;	// 单元格点击回调事件
@@ -57,6 +57,8 @@ public class CalendarView extends View {
 		void onMesureCellHeight(int cellSpace);//回调cell的高度确定slidingDrawer高度
 
 		void changeDate(CustomDate date);//回调滑动viewPager改变的日期
+
+		void init(CustomDate date);
 	}
 
 	public CalendarView(Context context, AttributeSet attrs, int defStyle) {
@@ -113,9 +115,14 @@ public class CalendarView extends View {
 
 	private void initDate() {
 		if (style == MONTH_STYLE) {
-			mShowDate = new CustomDate();
+			if(mShowDate == null){
+				mShowDate = new CustomDate();
+			}
+
 		} else if(style == WEEK_STYLE ) {
-			mShowDate = DateUtil.getNextSunday();
+			if(mShowDate == null){
+				mShowDate = DateUtil.getNextSunday();
+			}
 		}
 		fillDate();
 	}
@@ -346,7 +353,7 @@ public class CalendarView extends View {
 			for (int i = 0; i < TOTAL_COL; i++) {
 				int postion = i + j * TOTAL_COL;	// 单元格位置
 				if (postion >= firstDayWeek
-						&& postion < firstDayWeek + currentMonthDays) {	// 这个月的 
+						&& postion < firstDayWeek + currentMonthDays) {	// 这个月的
 					day++;
 					if (isCurrentMonth && day == monthDay) {
 						CustomDate date = CustomDate.modifiDayForObject(mShowDate, day);
@@ -372,6 +379,7 @@ public class CalendarView extends View {
 	}
 
 	public void backToday(){
+		mShowDate = new CustomDate();
 		initDate();
 		invalidate();
 	}
@@ -417,7 +425,6 @@ public class CalendarView extends View {
 	}
 	//向左滑动
 	public void leftSilde() {
-
 		if (style == MONTH_STYLE) {
 			if (mShowDate.month == 1) {
 				mShowDate.month = 12;
@@ -443,5 +450,41 @@ public class CalendarView extends View {
 			Log.i(TAG, "leftSilde"+mShowDate.toString());
 		}
 		update();
+	}
+
+	public void setmShowDate(CustomDate mShowDate) {
+		if(mShowDate != null){
+			this.mShowDate = mShowDate;
+		}else {
+			this.mShowDate = new CustomDate();
+		}
+
+		update();
+	}
+
+	public CustomDate getmShowDate() {
+		return this.mShowDate;
+	}
+
+	public void setSelect(CustomDate date){
+		System.out.println("setSelect date = " + date.toString());
+		if(date == null){
+			return;
+		}
+		for(int i = 0; i < TOTAL_ROW; i++){
+			for(int j = 0; j < TOTAL_COL; j++){
+				if(date.equals(rows[i].cells[j].date)){
+					System.out.println("i = " + i + ", j = " + j);
+					measureClickCell(j, i);
+				}
+			}
+		}
+
+	}
+
+	public void setInitPage(){
+		if(mOnCellCallBack != null){
+			mOnCellCallBack.init(mShowDate);
+		}
 	}
 }

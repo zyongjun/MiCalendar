@@ -10,6 +10,10 @@ import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.wb_lijinweia.mockmicalendar.micalendar.MonthPager;
+import com.example.wb_lijinweia.mockmicalendar.micalendar.model.CustomDate;
+import com.example.wb_lijinweia.mockmicalendar.micalendar.views.CalendarView;
+
 public class CalendarViewAdapter<V extends View> extends PagerAdapter {
 	public static final String TAG = "CalendarViewAdapter";
 
@@ -20,15 +24,24 @@ public class CalendarViewAdapter<V extends View> extends PagerAdapter {
 		this.views = views;
 	}
 
-	
 	@Override
 	public Object instantiateItem(ViewGroup container, int position) {
+
+		boolean isInitToday = true;
 		if (((ViewPager) container).getChildCount() == views.length) {
+			isInitToday = false;
 			((ViewPager) container).removeView(views[position % views.length]);
 		}
-		
-		((ViewPager) container).addView(views[position % views.length], 0);
-		return views[position % views.length];
+		View view = views[position % views.length];
+		if(view instanceof CalendarView){
+			((CalendarView) view).setmShowDate(CustomDate.addMonth(new CustomDate(), position - MonthPager.CURRENT_DAY_INDEX));
+
+			if(position == MonthPager.CURRENT_DAY_INDEX && isInitToday){
+				((CalendarView) view).setInitPage();
+			}
+		}
+		((ViewPager) container).addView(view, 0);
+		return view;
 	}
 
 	@Override
@@ -45,7 +58,23 @@ public class CalendarViewAdapter<V extends View> extends PagerAdapter {
 	public void destroyItem(ViewGroup container, int position, Object object) {
 		((ViewPager) container).removeView((View) container);
 	}
-	
+
+	public void updateDay(CustomDate date, int position){
+		MonthPager.CURRENT_DAY_INDEX = position;
+		if(views != null){
+			if(views[position % views.length] instanceof CalendarView){
+				CalendarView v = (CalendarView) views[position % views.length];
+				v.setmShowDate(date);
+
+				CalendarView v2 = (CalendarView) views[(position - 1) % views.length];
+				v2.setmShowDate(CustomDate.addMonth(date, -1));
+
+				CalendarView v3 = (CalendarView) views[(position + 1) % views.length];
+				v3.setmShowDate(CustomDate.addMonth(date, 1));
+			}
+		}
+	}
+
 	public V[] getAllItems() {
 		return views;
 	}
