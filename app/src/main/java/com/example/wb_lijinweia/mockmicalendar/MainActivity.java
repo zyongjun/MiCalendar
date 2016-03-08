@@ -32,10 +32,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private TextView monthCalendarView;
     private TextView weekCalendarView;
     private CircleTextView today;
-    CalendarView[] viewsMonth;
-    CalendarView.OnCellCallBack mCallback;
-    private int mCurrentPage;
-
+    private CalendarView[] viewsMonth;
+    private CalendarView.OnCellCallBack mCallback;
+    private int mCurrentPage = MonthPager.CURRENT_DAY_INDEX;
+    private CustomDate lastClickCustomDate;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,6 +62,22 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 textViewYearDisplay.setText(date.getYear() + "");
                 textViewMonthDisplay.setText(date.getMonth() + "月");
                 textViewWeekDisplay.setText(date.getDisplayWeek(date.getWeek()) + "");
+
+            }
+
+            @Override
+            public void clickDatePosition(CustomDate date, CalendarView.State state) {
+                lastClickCustomDate = date;
+                switch (state){
+                    case CURRENT_MONTH_DAY:
+                        break;
+                    case PAST_MONTH_DAY:
+                        mViewPager.setCurrentItem(mCurrentPage - 1);
+                        break;
+                    case NEXT_MONTH_DAY:
+                        mViewPager.setCurrentItem(mCurrentPage + 1);
+                        break;
+                }
             }
 
             @Override
@@ -138,7 +154,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     textViewYearDisplay.setText(date.getYear() + "");
                     textViewMonthDisplay.setText(date.getMonth() + "月");
                     textViewWeekDisplay.setText(date.getDisplayWeek(date.getWeek()) + "");
-                    mShowViews[position % mShowViews.length].setSelect(date);
+                    if(lastClickCustomDate != null){
+                        mShowViews[position % mShowViews.length].setSelect(lastClickCustomDate);
+                        lastClickCustomDate = null;
+                    }else {
+                        //mShowViews[position % mShowViews.length].setSelect(date);
+                    }
                 }
             }
 

@@ -52,6 +52,8 @@ public class CalendarView extends View {
 
 		void clickDate(CustomDate date);//回调点击的日期
 
+		void clickDatePosition(CustomDate date, State state);//回调点击的日期
+
 		void clickPosition(int position);
 
 		void onMesureCellHeight(int cellSpace);//回调cell的高度确定slidingDrawer高度
@@ -186,6 +188,16 @@ public class CalendarView extends View {
 			/*mTodayCell = new Cell(rows[row].cells[col].date,
 					rows[row].cells[col].state, rows[row].cells[col].i,
 					rows[row].cells[col].j);*/
+
+			if(mOnCellCallBack != null){
+				if(rows[row].cells[col].state == State.NEXT_MONTH_DAY ||
+						rows[row].cells[col].state == State.PAST_MONTH_DAY){
+					mShowDate = rows[row].cells[col].date;
+					mOnCellCallBack.clickDatePosition(rows[row].cells[col].date, rows[row].cells[col].state);
+					return;
+				}
+			}
+
 			rows[row].cells[col].state = State.CLICK_DAY;
 			CustomDate date = rows[row].cells[col].date;
 			date.week = col;
@@ -194,7 +206,6 @@ public class CalendarView extends View {
 				mOnCellCallBack.clickDate(date);
 				mOnCellCallBack.clickPosition(row * TOTAL_COL + col);
 			}
-
 			invalidate();
 		}
 	}
@@ -202,7 +213,6 @@ public class CalendarView extends View {
 	// 组
 	class Row {
 		public int j;
-
 		Row(int j) {
 			this.j = j;
 		}
@@ -288,7 +298,7 @@ public class CalendarView extends View {
 	 *当前月日期，过去的月的日期，下个月的日期，今天，点击的日期
 	 *
 	 */
-	enum State {
+	public enum State {
 		CURRENT_MONTH_DAY, PAST_MONTH_DAY, NEXT_MONTH_DAY, TODAY, CLICK_DAY;
 	}
 
@@ -467,14 +477,12 @@ public class CalendarView extends View {
 	}
 
 	public void setSelect(CustomDate date){
-		System.out.println("setSelect date = " + date.toString());
 		if(date == null){
 			return;
 		}
 		for(int i = 0; i < TOTAL_ROW; i++){
 			for(int j = 0; j < TOTAL_COL; j++){
 				if(date.equals(rows[i].cells[j].date)){
-					System.out.println("i = " + i + ", j = " + j);
 					measureClickCell(j, i);
 				}
 			}
