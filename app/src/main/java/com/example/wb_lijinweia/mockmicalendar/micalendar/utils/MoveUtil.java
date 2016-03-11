@@ -7,9 +7,6 @@ package com.example.wb_lijinweia.mockmicalendar.micalendar.utils;
 
 import android.view.View;
 
-/**
- * Created by YCJ on 2015/11/30.
- */
 public class MoveUtil {
 
     private static int clamp(int value, int min, int max) {

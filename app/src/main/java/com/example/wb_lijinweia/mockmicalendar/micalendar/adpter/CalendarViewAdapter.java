@@ -26,7 +26,6 @@ public class CalendarViewAdapter<V extends View> extends PagerAdapter {
 
 	@Override
 	public Object instantiateItem(ViewGroup container, int position) {
-
 		boolean isInitToday = true;
 		if (((ViewPager) container).getChildCount() == views.length) {
 			isInitToday = false;
