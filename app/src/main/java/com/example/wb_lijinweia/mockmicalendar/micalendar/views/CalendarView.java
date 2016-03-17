@@ -66,13 +66,11 @@ public class CalendarView extends View {
 	public CalendarView(Context context, AttributeSet attrs, int defStyle) {
 		super(context, attrs, defStyle);
 		init(context);
-
 	}
 
 	public CalendarView(Context context, AttributeSet attrs) {
 		super(context, attrs);
 		init(context);
-
 	}
 
 	public CalendarView(Context context) {
@@ -98,6 +96,17 @@ public class CalendarView extends View {
 		for (int i = 0; i < TOTAL_ROW; i++) {
 			if (rows[i] != null)
 				rows[i].drawCells(canvas);
+		}
+	}
+
+	@Override
+	protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+		if(mCellSpace > 0){
+			int h = MeasureSpec.makeMeasureSpec(mCellSpace * TOTAL_ROW,
+					MeasureSpec.EXACTLY);
+			super.onMeasure(widthMeasureSpec, h);
+		}else {
+			super.onMeasure(widthMeasureSpec, heightMeasureSpec);
 		}
 	}
 

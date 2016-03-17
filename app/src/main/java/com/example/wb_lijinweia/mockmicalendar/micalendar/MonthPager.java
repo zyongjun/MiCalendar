@@ -11,6 +11,7 @@ import android.view.View;
 public class MonthPager extends ViewPager {
     public static int CURRENT_DAY_INDEX = 1000;
     private int selectedIndex;
+    private int mCellSpace;
 
     public MonthPager(Context context) {
         this(context, null);
@@ -46,22 +47,20 @@ public class MonthPager extends ViewPager {
         super.onLayout(changed, l, t, r, b);
     }
 
-    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-        /*int height = 0;
-        //下面遍历所有child的高度
-        for (int i = 0; i < getChildCount(); i++) {
-            View child = getChildAt(i);
-            child.measure(widthMeasureSpec,
-                    MeasureSpec.makeMeasureSpec(Integer.MAX_VALUE >> 2, MeasureSpec.AT_MOST));
-            int h = child.getMeasuredHeight();
-            if (h > height) //采用最大的view的高度。
-                height = h;
-        }
+    @Override
+    protected void onSizeChanged(int w, int h, int oldw, int oldh) {
+        System.out.println(String.format("w=%s, h = %s, oldw = %s, oldh=%s", w,h, oldw,oldh));
+        mCellSpace = Math.min(h / 6, w / 7);
+        super.onSizeChanged(w, h, oldw, oldh);
+    }
 
-        heightMeasureSpec = MeasureSpec.makeMeasureSpec(height,
-                MeasureSpec.EXACTLY);
-*/
-        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+        if(mCellSpace > 0){
+            super.onMeasure(widthMeasureSpec,MeasureSpec.makeMeasureSpec(mCellSpace * 6,
+                    MeasureSpec.EXACTLY));
+        }else {
+            super.onMeasure(widthMeasureSpec,heightMeasureSpec);
+        }
     }
 
     public static class Behavior extends CoordinatorLayout.Behavior<MonthPager> {

@@ -38,12 +38,9 @@ public class EventListBehavior extends CoordinatorLayout.Behavior<RecyclerView> 
 
    /* @Override
     public boolean onMeasureChild(CoordinatorLayout parent, RecyclerView child, int parentWidthMeasureSpec, int widthUsed, int parentHeightMeasureSpec, int heightUsed) {
-        System.out.println("pppp onMeasureChild");
         MonthPager monthPager = getMonthPager(parent);
         final int measuredHeight = View.MeasureSpec.getSize(parentHeightMeasureSpec) - heightUsed - monthPager.getHeight() / 6;
         int childMeasureSpec = View.MeasureSpec.makeMeasureSpec(measuredHeight, View.MeasureSpec.EXACTLY);
-        System.out.println("pppp onMeasureChild measuredHeight = " + measuredHeight);
-        System.out.println("pppp onMeasureChild childMeasureSpec = " + childMeasureSpec);
         child.measure(parentWidthMeasureSpec, childMeasureSpec);
         return true;
     }*/
@@ -52,15 +49,15 @@ public class EventListBehavior extends CoordinatorLayout.Behavior<RecyclerView> 
     public boolean onStartNestedScroll(CoordinatorLayout coordinatorLayout, RecyclerView child, View directTargetChild, View target, int nestedScrollAxes) {
         //We have to declare interest in the scroll to receive further events
         boolean isVertical = (nestedScrollAxes & ViewCompat.SCROLL_AXIS_VERTICAL) != 0;
-        //Only capture on the view currently being scrolled
-        return isVertical && child == directTargetChild;
-    }
 
-    /*@Override
-    public void onNestedScroll(CoordinatorLayout coordinatorLayout, RecyclerView child, View target, int dxConsumed, int dyConsumed, int dxUnconsumed, int dyUnconsumed) {
-        System.out.println("pppp onNestedScroll1111");
-        super.onNestedScroll(coordinatorLayout, child, target, dxConsumed, dyConsumed, dxUnconsumed, dyUnconsumed);
-    }*/
+        int topRowVerticalPosition =
+                (child == null || child.getChildCount() == 0) ? 0 : child.getChildAt(0).getTop();
+
+        boolean recycleviewTopStatus = topRowVerticalPosition >= 0;
+
+        //Only capture on the view currently being scrolled
+        return isVertical && (recycleviewTopStatus || isGoingUp) && child == directTargetChild;
+    }
 
     @Override
     public void onNestedPreScroll(CoordinatorLayout coordinatorLayout, RecyclerView child, View target, int dx, int dy, int[] consumed) {

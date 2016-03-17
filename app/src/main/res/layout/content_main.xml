@@ -15,20 +15,19 @@
     <android.support.design.widget.CoordinatorLayout
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_weight="1">
 
         <com.example.wb_lijinweia.mockmicalendar.micalendar.MonthPager
             android:id="@+id/vp_calendar"
             android:layout_width="match_parent"
-            android:layout_height="300dp"
-            android:background="@android:color/white">
+            android:layout_height="306dp">
         </com.example.wb_lijinweia.mockmicalendar.micalendar.MonthPager>
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/list"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             app:layout_behavior="com.example.wb_lijinweia.mockmicalendar.micalendar.EventListBehavior"
             android:background="#C0C0C0"/>
 
@@ -37,8 +36,7 @@
     <RelativeLayout
         android:layout_width="fill_parent"
         android:layout_height="60dip"
-        android:background="@drawable/bottom_bar_bg"
-        >
+        android:background="@drawable/bottom_bar_bg" >
 
         <View
             android:layout_width="fill_parent"

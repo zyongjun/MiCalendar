@@ -55,14 +55,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         rvToDoList.setHasFixedSize(true);
         rvToDoList.setLayoutManager(new LinearLayoutManager(this));//这里用线性显示 类似于listview
         rvToDoList.setAdapter(new NormalRecyclerViewAdapter(this));
-
+        
         mCallback = new CalendarView.OnCellCallBack() {
             @Override
             public void clickDate(CustomDate date) {
                 textViewYearDisplay.setText(date.getYear() + "");
                 textViewMonthDisplay.setText(date.getMonth() + "月");
                 textViewWeekDisplay.setText(date.getDisplayWeek(date.getWeek()) + "");
-
             }
 
             @Override
