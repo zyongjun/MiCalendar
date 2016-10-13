@@ -1,4 +1,4 @@
-package com.example.wb_lijinweia.mockmicalendar.micalendar;
+package com.windhike.calendar.widget;
 
 import android.content.Context;
 import android.support.design.widget.CoordinatorLayout;

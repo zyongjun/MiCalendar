@@ -3,7 +3,7 @@
  * wb-lijinwei.a@alibaba-inc.com
  */
 
-package com.example.wb_lijinweia.mockmicalendar.micalendar.views;
+package com.windhike.calendar.widget;
 
 import android.content.Context;
 import android.graphics.Canvas;
@@ -15,9 +15,9 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewConfiguration;
 
-import com.example.wb_lijinweia.mockmicalendar.micalendar.model.CustomDate;
-import com.example.wb_lijinweia.mockmicalendar.micalendar.utils.DateUtil;
-import com.example.wb_lijinweia.mockmicalendar.micalendar.utils.LunarCalendar;
+import com.windhike.calendar.model.CustomDate;
+import com.windhike.calendar.utils.DateUtil;
+import com.windhike.calendar.utils.LunarCalendar;
 
 public class CalendarView extends View {
 	private static final String TAG = "CalendarView";
@@ -376,7 +376,7 @@ public class CalendarView extends View {
 					day++;
 					if (isCurrentMonth && day == monthDay) {
 						CustomDate date = CustomDate.modifiDayForObject(mShowDate, day);
-						mTodayCell = new Cell(date,State.TODAY, i,j);
+						mTodayCell = new Cell(date, State.TODAY, i,j);
 						date.week = i;
 						rows[j].cells[i] = mTodayCell;
 						continue;

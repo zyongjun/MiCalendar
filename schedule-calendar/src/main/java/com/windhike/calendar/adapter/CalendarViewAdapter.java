@@ -3,16 +3,15 @@
  * wb-lijinwei.a@alibaba-inc.com
  */
 
-package com.example.wb_lijinweia.mockmicalendar.micalendar.adpter;
+package com.windhike.calendar.adapter;
 
 import android.support.v4.view.PagerAdapter;
-import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.wb_lijinweia.mockmicalendar.micalendar.MonthPager;
-import com.example.wb_lijinweia.mockmicalendar.micalendar.model.CustomDate;
-import com.example.wb_lijinweia.mockmicalendar.micalendar.views.CalendarView;
+import com.windhike.calendar.model.CustomDate;
+import com.windhike.calendar.widget.CalendarView;
+import com.windhike.calendar.widget.MonthPager;
 
 public class CalendarViewAdapter<V extends View> extends PagerAdapter {
 	public static final String TAG = "CalendarViewAdapter";
@@ -27,9 +26,9 @@ public class CalendarViewAdapter<V extends View> extends PagerAdapter {
 	@Override
 	public Object instantiateItem(ViewGroup container, int position) {
 		boolean isInitToday = true;
-		if (((ViewPager) container).getChildCount() == views.length) {
+		if (container.getChildCount() == views.length) {
 			isInitToday = false;
-			((ViewPager) container).removeView(views[position % views.length]);
+			container.removeView(views[position % views.length]);
 		}
 		View view = views[position % views.length];
 		if(view instanceof CalendarView){
@@ -39,7 +38,7 @@ public class CalendarViewAdapter<V extends View> extends PagerAdapter {
 				((CalendarView) view).setInitPage();
 			}
 		}
-		((ViewPager) container).addView(view, 0);
+		container.addView(view, 0);
 		return view;
 	}
 
@@ -55,7 +54,7 @@ public class CalendarViewAdapter<V extends View> extends PagerAdapter {
 
 	@Override
 	public void destroyItem(ViewGroup container, int position, Object object) {
-		((ViewPager) container).removeView((View) container);
+		container.removeView(container);
 	}
 
 	public void updateDay(CustomDate date, int position){

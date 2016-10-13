@@ -18,17 +18,17 @@
         android:layout_height="wrap_content"
         android:layout_weight="1">
 
-        <com.example.wb_lijinweia.mockmicalendar.micalendar.MonthPager
+        <com.windhike.calendar.widget.MonthPager
             android:id="@+id/vp_calendar"
             android:layout_width="match_parent"
-            android:layout_height="306dp">
-        </com.example.wb_lijinweia.mockmicalendar.micalendar.MonthPager>
+            android:layout_height="306dp"/>
+
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/list"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_behavior="com.example.wb_lijinweia.mockmicalendar.micalendar.EventListBehavior"
+            app:layout_behavior="com.windhike.calendar.event.EventListBehavior"
             android:background="#C0C0C0"/>
 
     </android.support.design.widget.CoordinatorLayout>
@@ -45,7 +45,7 @@
             android:background="#20000000" >
         </View>
 
-        <com.example.wb_lijinweia.mockmicalendar.micalendar.views.CircleTextView
+        <com.windhike.calendar.widget.CircleTextView
             android:id="@+id/now_circle_view"
             android:layout_width="50dip"
             android:layout_height="50dip"
@@ -54,7 +54,7 @@
             android:layout_marginRight="10dip"
             app:text="今" />
 
-        <com.example.wb_lijinweia.mockmicalendar.micalendar.views.CircleTextView
+        <com.windhike.calendar.widget.CircleTextView
             android:id="@+id/subscibe_circle_view"
             android:layout_width="50dip"
             android:layout_height="50dip"
@@ -62,7 +62,7 @@
             android:layout_toLeftOf="@id/now_circle_view"
             app:text="订" />
 
-        <com.example.wb_lijinweia.mockmicalendar.micalendar.views.CircleTextView
+        <com.windhike.calendar.widget.CircleTextView
             android:id="@+id/add_circle_view"
             android:layout_width="50dip"
             android:layout_height="50dip"

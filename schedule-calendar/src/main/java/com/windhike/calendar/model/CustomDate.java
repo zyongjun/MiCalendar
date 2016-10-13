@@ -3,11 +3,13 @@
  * wb-lijinwei.a@alibaba-inc.com
  */
 
-package com.example.wb_lijinweia.mockmicalendar.micalendar.model;
+package com.windhike.calendar.model;
 
-import com.example.wb_lijinweia.mockmicalendar.micalendar.utils.DateUtil;
+
+import com.windhike.calendar.utils.DateUtil;
 
 import java.io.Serializable;
+
 public class CustomDate implements Serializable{
 	private static final long serialVersionUID = 1L;
 	public int year;
@@ -15,7 +17,7 @@ public class CustomDate implements Serializable{
 	public int day;
 	public int week;
 	
-	public CustomDate(int year,int month,int day){
+	public CustomDate(int year, int month, int day){
 		if(month > 12){
 			month = 1;
 			year++;

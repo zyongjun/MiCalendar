@@ -3,11 +3,11 @@
  * wb-lijinwei.a@alibaba-inc.com
  */
 
-package com.example.wb_lijinweia.mockmicalendar.micalendar.utils;
+package com.windhike.calendar.utils;
 
 import android.annotation.SuppressLint;
 
-import com.example.wb_lijinweia.mockmicalendar.micalendar.model.CustomDate;
+import com.windhike.calendar.model.CustomDate;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;

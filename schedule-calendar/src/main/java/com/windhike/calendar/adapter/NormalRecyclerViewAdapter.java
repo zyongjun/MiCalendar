@@ -3,7 +3,7 @@
  * wb-lijinwei.a@alibaba-inc.com
  */
 
-package com.example.wb_lijinweia.mockmicalendar.micalendar.adpter;
+package com.windhike.calendar.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -13,7 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.example.wb_lijinweia.mockmicalendar.R;
+import com.windhike.calendar.R;
 
 /**
  * Created by wb-lijinwei.a on 2016/2/25.

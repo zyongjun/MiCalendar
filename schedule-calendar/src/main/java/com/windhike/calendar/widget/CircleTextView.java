@@ -3,7 +3,7 @@
  * wb-lijinwei.a@alibaba-inc.com
  */
 
-package com.example.wb_lijinweia.mockmicalendar.micalendar.views;
+package com.windhike.calendar.widget;
 
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -14,7 +14,8 @@ import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
 
-import com.example.wb_lijinweia.mockmicalendar.R;
+import com.windhike.calendar.R;
+
 
 public class CircleTextView extends View {
 	private String mText ="订";

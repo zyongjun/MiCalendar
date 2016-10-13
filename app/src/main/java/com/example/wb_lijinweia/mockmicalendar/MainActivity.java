@@ -13,12 +13,12 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
-import com.example.wb_lijinweia.mockmicalendar.micalendar.views.CalendarView;
-import com.example.wb_lijinweia.mockmicalendar.micalendar.adpter.CalendarViewAdapter;
-import com.example.wb_lijinweia.mockmicalendar.micalendar.model.CustomDate;
-import com.example.wb_lijinweia.mockmicalendar.micalendar.MonthPager;
-import com.example.wb_lijinweia.mockmicalendar.micalendar.adpter.NormalRecyclerViewAdapter;
-import com.example.wb_lijinweia.mockmicalendar.micalendar.views.CircleTextView;
+import com.windhike.calendar.adapter.CalendarViewAdapter;
+import com.windhike.calendar.adapter.NormalRecyclerViewAdapter;
+import com.windhike.calendar.model.CustomDate;
+import com.windhike.calendar.widget.CalendarView;
+import com.windhike.calendar.widget.CircleTextView;
+import com.windhike.calendar.widget.MonthPager;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     private MonthPager mViewPager;
